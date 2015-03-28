@@ -25,6 +25,14 @@ class beansbooks::config {
     ## utf8 ??
     require       => Anchor['beansbooks::config::begin'],
   }
+  
+  file { "${beansbooks::dest_path}/application/classes/beans/config.php":
+    ensure  => file,
+    mode    => '0660',
+    owner   => 'www-data',
+    content => template('beansbooks/config.php.erb'),
+    require => Postgresql::Server::Db['beansbooks'],
+  }
 
   check_run::task {'web_install':
     exec_command => "/usr/bin/php index.php --uri=/install/manual\
@@ -33,7 +41,9 @@ class beansbooks::config {
  --email='${beansbooks::admin_user_email}'\
  --accounts='full'",
     cwd         => $beansbooks::dest_path,
-    require => Postgresql::Server::Db['beansbooks'],
+    require => File [
+    "${beansbooks::dest_path}/application/classes/beans/config.php"
+    ],
   }
 
   anchor{'beansbooks::config::end':
