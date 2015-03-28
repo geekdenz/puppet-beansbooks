@@ -31,6 +31,7 @@ class beansbooks (
   $admin_user_full_name,
   $admin_user_email,
   $admin_user_pass,
+  $servername = 'localhost',
   $db_host = 'localhost',
   $db_user = 'beans',
   $db_pass = 'beans',

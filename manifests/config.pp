@@ -19,7 +19,7 @@ class beansbooks::config {
 
   ## configure apache
   apache::vhost { 'beansbooks':
-    servername  => 'beansbooks',
+    servername  => $beansbooks::servername,
     port        => '80',
     docroot     => $beansbooks::dest_path,
     directories => [ 

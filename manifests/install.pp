@@ -27,7 +27,10 @@ class beansbooks::install {
   
   ## apache
   class {'apache':
-    require => Package[$packages],
+    mpm_module => 'prefork',
+    default_vhost => false,
+    servername    => $beansbooks::servername,
+    require       => Package[$packages],
   }
   class {'::apache::mod::php':}
   class {'::apache::mod::rewrite':}
