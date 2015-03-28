@@ -26,10 +26,6 @@ class beansbooks::config {
     require       => Anchor['beansbooks::config::begin'],
   }
 
-  class {'check_run':
-    require => Postgresql::Server::Db['beansbooks'],
-  }
-
   check_run::task {'web_install':
     exec_command => "/usr/bin/php index.php --uri=/install/manual\
  --name='${beansbooks::admin_user_full_name}'\
@@ -37,7 +33,7 @@ class beansbooks::config {
  --email='${beansbooks::admin_user_email}'\
  --accounts='full'",
     cwd         => $beansbooks::dest_path,
-    require     => Class['check_run'],
+    require => Postgresql::Server::Db['beansbooks'],
   }
 
   anchor{'beansbooks::config::end':
