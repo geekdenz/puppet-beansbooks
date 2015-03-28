@@ -19,7 +19,7 @@ class beansbooks::install {
   anchor {'beansbooks::install::begin':}
   
   ## packages
-  $packages = ['php5-cli','php5-mcrypt','php5-gd','php5-pgsql']
+  $packages = ['php5-cli','php5-mcrypt','php5-gd','php5-pgsql','git']
   package{$packages:
     ensure  => installed,
     require => Anchor ['beansbooks::install::begin'],
