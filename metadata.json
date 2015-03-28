@@ -1,0 +1,25 @@
+{
+  "name": "spethm-beansbooks",
+  "version": "0.1.0",
+  "author": "Michael Speth",
+  "summary": "Installs and configures System76's Beansbooks",
+  "license": "GPL-3.0+",
+  "source": "https://github.com/Conzar/puppet-beansbooks.git",
+  "project_page": "https://github.com/Conzar/puppet-beansbooks",
+  "issues_url": "https://github.com/Conzar/puppet-beansbooks/issues",
+  "tags": [],
+  "operatingsystem_support": [
+    { "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "12.04", "14.04" ] }
+  ],
+  "dependencies": [
+    {
+    	"name":"puppetlabs-stdlib",
+      "version_requirement":">= 4.0.0"
+    },
+    {
+      "name": "puppetlabs/vcsrepo",
+      "version_requirement": ">= 1.1.0"
+    }
+  ]
+}
