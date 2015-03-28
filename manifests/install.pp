@@ -65,14 +65,18 @@ class beansbooks::install {
     require  => Class['postgresql::server'],
   }
   
-  ## copy the source  
-  exec {'copy src':
-    command => "/bin/cp -r ${beansbooks::src_path} ${beansbooks::dest_path}",
-    creates => $beansbooks::dest_path,
+
+  class {'check_run':
     require => Vcsrepo [ $beansbooks::src_path ],
   }
 
+  ## copy the source  
+  check_run::task {'copy_src':
+    exec_command => "/bin/cp -r ${beansbooks::src_path} ${beansbooks::dest_path}",
+    require => Class['check_run'],
+  }
+
   anchor {'beansbooks::install::end':
-    require => Vcsrepo [$beansbooks::src_path]
+    require => Check_run::Task['copy_src'],
   }
 }
