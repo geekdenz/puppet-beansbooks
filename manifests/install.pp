@@ -32,8 +32,24 @@ class beansbooks::install {
     servername    => $beansbooks::servername,
     require       => Package[$packages],
   }
-  class {'::apache::mod::php':}
-  class {'::apache::mod::rewrite':}
+  class {'::apache::mod::php': }
+  class {'::apache::mod::rewrite': }
+  ## configure apache
+  apache::vhost { 'beansbooks':
+    servername    => $beansbooks::servername,
+    port          => '80',
+    docroot       => $beansbooks::dest_path,
+    default_vhost => true,
+    directories   => [ 
+      {
+        path => $beansbooks::dest_path,
+        auth_require => 'all granted',
+        allow_override => ['All'],
+        options => ['FollowSymLinks'],
+      }
+    ],
+    require       => Anchor['beansbooks::install::begin'],
+  }
   
 
   ## postgresql

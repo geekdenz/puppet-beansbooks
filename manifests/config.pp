@@ -19,10 +19,11 @@ class beansbooks::config {
 
   ## configure apache
   apache::vhost { 'beansbooks':
-    servername  => $beansbooks::servername,
-    port        => '80',
-    docroot     => $beansbooks::dest_path,
-    directories => [ 
+    servername    => $beansbooks::servername,
+    port          => '80',
+    docroot       => $beansbooks::dest_path,
+    default_vhost => true,
+    directories   => [ 
       {
         path => $beansbooks::dest_path,
         auth_require => 'all granted',
@@ -30,7 +31,7 @@ class beansbooks::config {
         options => ['FollowSymLinks'],
       }
     ],
-    require     => Anchor['beansbooks::config::begin'],
+    require       => Anchor['beansbooks::config::begin'],
   }
 
   ## configure postgresql
