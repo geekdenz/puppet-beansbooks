@@ -61,7 +61,8 @@ class beansbooks::install {
   vcsrepo { $beansbooks::src_path:
     ensure   => present,
     provider => 'git',
-    source   => 'https://github.com/system76/beansbooks.git',
+    #source   => 'https://github.com/system76/beansbooks.git',
+    source   => 'https://github.com/Conzar/beansbooks.git',
     require  => Class['postgresql::server'],
   }
   
