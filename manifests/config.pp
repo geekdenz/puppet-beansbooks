@@ -36,7 +36,8 @@ class beansbooks::config {
  --password='${beansbooks::admin_user_pass}'\
  --email='${beansbooks::admin_user_email}'\
  --accounts='full'",
-    require => Class['check_run'],
+    cwd         => $beansbooks::dest_path,
+    require     => Class['check_run'],
   }
 
   anchor{'beansbooks::config::end':
