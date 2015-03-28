@@ -72,7 +72,7 @@ class beansbooks::install {
 
   ## copy the source  
   check_run::task {'copy_src':
-    exec_command => "/bin/cp -r ${beansbooks::src_path} ${beansbooks::dest_path}",
+    exec_command => "/bin/rm -rf ${beansbooks::dest_path} && /bin/cp -r ${beansbooks::src_path} ${beansbooks::dest_path}",
     require => Class['check_run'],
   }
 
