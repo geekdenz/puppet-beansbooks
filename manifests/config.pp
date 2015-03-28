@@ -23,14 +23,23 @@ class beansbooks::config {
     user     => $beansbooks::db_user,
     password => postgresql_password($beansbooks::db_user, $beansbooks::db_pass),
     ## utf8 ??
-    #require  => Apache::Vhost['beansbooks'],
     require       => Anchor['beansbooks::config::begin'],
   }
 
-#  exec {'web install':
-#    command => "php index.php --uri=/install/manual --name='Your Name' --password='password' --email='you@email.address' --accounts='full'",
-#    require => Postgresql::Server::Db [ 'beansbooks'],
-#  }
+  class {'check_run':
+    require => Postgresql::Server::Db['beansbooks'],
+  }
 
-  anchor{'beansbooks::config::end':}
+  check_run::task {'web_install':
+    exec_command => "/usr/bin/php index.php --uri=/install/manual\
+ --name='${beansbooks::admin_user_full_name}'\
+ --password='${beansbooks::admin_user_pass}'\
+ --email='${beansbooks::admin_user_email}'\
+ --accounts='full'",
+    require => Class['check_run'],
+  }
+
+  anchor{'beansbooks::config::end':
+    require => Check_run::Task['web_install'],
+  }
 }
