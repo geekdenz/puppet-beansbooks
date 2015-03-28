@@ -17,29 +17,14 @@ class beansbooks::config {
 
   anchor{'beansbooks::config::begin':}
 
-  ## configure apache
-  apache::vhost { 'beansbooks':
-    servername    => $beansbooks::servername,
-    port          => '80',
-    docroot       => $beansbooks::dest_path,
-    default_vhost => true,
-    directories   => [ 
-      {
-        path => $beansbooks::dest_path,
-        auth_require => 'all granted',
-        allow_override => ['All'],
-        options => ['FollowSymLinks'],
-      }
-    ],
-    require       => Anchor['beansbooks::config::begin'],
-  }
 
   ## configure postgresql
   postgresql::server::db { 'beansbooks':
     user     => $beansbooks::db_user,
     password => postgresql_password($beansbooks::db_user, $beansbooks::db_pass),
     ## utf8 ??
-    require  => Apache::Vhost['beansbooks'],
+    #require  => Apache::Vhost['beansbooks'],
+    require       => Anchor['beansbooks::config::begin'],
   }
 
 #  exec {'web install':
