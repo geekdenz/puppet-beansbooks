@@ -19,7 +19,7 @@ class beansbooks::config {
 
 
   ## configure postgresql
-  postgresql::server::db { 'beansbooks':
+  postgresql::server::db { 'beans':
     user     => $beansbooks::db_user,
     password => postgresql_password($beansbooks::db_user, $beansbooks::db_pass),
     ## utf8 ??
