@@ -31,7 +31,7 @@ class beansbooks::config {
     mode    => '0660',
     owner   => 'www-data',
     content => template('beansbooks/config.php.erb'),
-    require => Postgresql::Server::Db['beansbooks'],
+    require => Postgresql::Server::Db['beans'],
   }
 
   check_run::task {'web_install':
