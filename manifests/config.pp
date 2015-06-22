@@ -35,7 +35,7 @@ class beansbooks::config {
   }
 
   check_run::task {'web_install':
-    exec_command => "/usr/bin/php index.php --uri=/install/manual\
+    exec_command => "/usr/bin/php /var/www/beansbooks/index.php --uri=/install/manual\
  --name='${beansbooks::admin_user_full_name}'\
  --password='${beansbooks::admin_user_pass}'\
  --email='${beansbooks::admin_user_email}'\
