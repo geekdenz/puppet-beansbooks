@@ -28,7 +28,7 @@ class beansbooks::config {
   
   file { "${beansbooks::dest_path}/application/classes/beans/config.php":
     ensure  => file,
-    mode    => '0660',
+    mode    => '0666',
     owner   => 'www-data',
     content => template('beansbooks/config.php.erb'),
     require => Postgresql::Server::Db['beans'],
@@ -42,7 +42,7 @@ class beansbooks::config {
   }
 
   file { "${beansbooks::dest_path}/application/logs":
-    mode => '0666',
+    mode => '0660',
     require => File [
       "${beansbooks::dest_path}/application/bootstrap.php"
     ],
