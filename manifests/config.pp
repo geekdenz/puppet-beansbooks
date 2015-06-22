@@ -34,10 +34,17 @@ class beansbooks::config {
     require => Postgresql::Server::Db['beans'],
   }
 
-  file { "${beansbooks::dest_path}/application/cache":
+  file { "${beansbooks::dest_path}/application/logs":
     mode => '0666',
     require => File [
       "${beansbooks::dest_path}/application/classes/beans/config.php"
+    ],
+  }
+
+  file { "${beansbooks::dest_path}/application/cache":
+    mode => '0666',
+    require => File [
+      "${beansbooks::dest_path}/application/logs"
     ],
   }
 
